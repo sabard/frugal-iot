@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Frugal IoT  Demo</title>
+    <link href="./frugaliot.css" rel="stylesheet" type="text/css">
+    <script src="./webcomponents.js" type="module"></script>
+</head>
+<body>
+<mqtt-client server="ws://localhost:9012"></mqtt-client><!-- wont work on public.cloud.shiftr.io mqtt://test.mosquitto.org" -->
+<mqtt-bar topic="/temperature" value="34.3" min="0" max="45", color="red"></mqtt-bar>
+<mqtt-bar topic="/humidity" value="75" min="0" max="100", color="cornflowerblue"></mqtt-bar>
+<mqtt-toggle topic="/ledbuiltin" retain="1", qos="1">LED</mqtt-toggle>
+</body>
+</html>

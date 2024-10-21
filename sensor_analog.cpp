@@ -7,20 +7,17 @@
 // TODO add the _ARRAY parameters as used in sensor_sht85.cpp so will read multiple analog inputs.
 
 #include "_settings.h"  // Settings for what to include etc
-#include "_common.h"    // Main include file for Framework
-#ifdef WANT_SENSOR_ANALOG
+#ifdef SENSOR_ANALOG_WANT
 #include <Arduino.h>
+#include "_common.h"    // Main include file for Framework
 #include "sensor_analog.h"
-#ifdef SENSOR_ANALOG_MS
-#include "system_clock.h"
-#endif // SENSOR_ANALOG_MS
 
 // TODO figure out how to handle multiple analog input pins 
 
 namespace sAnalog {
 
 #ifdef SENSOR_ANALOG_MS
-unsigned long lastLoopTime = 0;
+unsigned long nextLoopTime = 0;
 #endif // SENSOR_ANALOG_MS
 
 int value = 0;
@@ -34,13 +31,13 @@ void setup() {
   //value = 0;
 }
 
-int readSensor() {
+void readSensor() {
   value = analogRead(SENSOR_ANALOG_PIN);
 }
 
 void loop() {
 #ifdef SENSOR_ANALOG_MS
-  if (sClock::hasIntervalPassed(lastLoopTime, SENSOR_ANALOG_MS)) {
+  if (nextLoopTime <= millis()) {
 #endif // SENSOR_ANALOG_MS
     readSensor();
 #ifdef SENSOR_ANALOG_SMOOTH // TODO maybe copy this to a system function
@@ -55,9 +52,9 @@ void loop() {
 #endif // SENSOR_ANALOG_SMOOTH
 #endif // SENSOR_ANALOG_DEBUG
 #ifdef SENSOR_ANALOG_MS
-        lastLoopTime = sClock::getTime();
+        nextLoopTime = millis() + SENSOR_ANALOG_MS;
     }
 #endif // SENSOR_ANALOG_MS
 }
 } //namespace sAnalog
-#endif // WANT_SENSOR_ANALOG
+#endif // SENSOR_ANALOG_WANT

@@ -5,9 +5,31 @@
 #include "_settings.h"  // Settings for what to include etc
 #include "_common.h"    // Main include file for Framework
 
+#ifdef SYSTEM_WIFI_WANT
+#include "system_wifi.h"
+#endif
+#ifdef SYSTEM_MQTT_WANT
+#include "system_mqtt.h"
+#endif
+#ifdef ACTUATOR_LEDBUILTIN_WANT
+#include "actuator_ledbuiltin.h"
+#endif
+#ifdef SENSOR_ANALOG_WANT
+#include "sensor_analog.h"
+#endif
+#ifdef SENSOR_SHT85_WANT
+#include "sensor_sht85.h"
+#endif
+#ifdef CONTROL_BLINKEN_WANT
+#include "control_blinken.h"
+#endif
+#ifdef CONTROL_DEMO_MQTT_WANT
+#include "control_demo_mqtt.h"
+#endif
+
 void setup() {
 #ifdef FRUGALIOT_DEBUG
-  Serial.begin(460800); // Initialize IO port TODO move to somewhere Forth wants it
+  Serial.begin(460800);
   while (!Serial) { 
     ; // wait for serial port to connect. Needed for Arduino Leonardo only
   }
@@ -16,16 +38,27 @@ void setup() {
   Serial.println("FrugalIoT Starting");
 #endif FRUGALIOT_DEBUG
 // put setup code here, to run once:
-#ifdef WANT_ACTUATOR_BLINKEN
-  aBlinken::setup();
+#ifdef SYSTEM_WIFI_WANT
+  xWifi::setup();
 #endif
-#ifdef WANT_SENSOR_ANALOG
+#ifdef SYSTEM_MQTT_WANT
+  xMqtt::setup();
+#endif
+#ifdef ACTUATOR_LEDBUILTIN_WANT
+  aLedbuiltin::setup();
+#endif
+#ifdef SENSOR_ANALOG_WANT
   sAnalog::setup();
 #endif
-#ifdef WANT_SENSOR_SHT85
+#ifdef SENSOR_SHT85_WANT
   sSHT85::setup();
 #endif
-
+#ifdef CONTROL_BLINKEN_WANT
+  cBlinken::setup();
+#endif
+#ifdef CONTROL_DEMO_MQTT_WANT
+  cDemoMqtt::setup(); // Must be after system_mqtt
+#endif
 
 #ifdef FRUGALIOT_DEBUG
   Serial.println("FrugalIoT Starting Loop");
@@ -34,14 +67,26 @@ void setup() {
 
 void loop() {
   // Put code for each sensor etc here - call functions in those sections
-#ifdef WANT_ACTUATOR_BLINKEN
-  aBlinken::loop();
+#ifdef SYSTEM_WIFI_WANT
+//  xWifi::loop(); // Not currently used
 #endif
-#ifdef WANT_SENSOR_ANALOG
+#ifdef SYSTEM_MQTT_WANT
+  xMqtt::loop();
+#endif
+#ifdef ACTUATOR_LEDBUILTIN_WANT
+  aLedbuiltin::loop();
+#endif
+#ifdef SENSOR_ANALOG_WANT
   sAnalog::loop();
 #endif
-#ifdef WANT_SENSOR_SHT85
+#ifdef SENSOR_SHT85_WANT
   sSHT85::loop();
+#endif
+#ifdef CONTROL_BLINKEN_WANT
+  cBlinken::loop();
+#endif
+#ifdef CONTROL_DEMO_MQTT_WANT
+//  cDemoMqtt::loop(); // Not currently used
 #endif
 
 }

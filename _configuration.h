@@ -1,4 +1,4 @@
-/* 
+/*
  * This file will be auto-generated, once auto-generation is built, this file shouldn't be human edited
  */
 
@@ -6,7 +6,8 @@
 #define FRUGALIOT_CONFIGURATION_H
 
 // Note that on ESP that ESP32 or ESP8266 will be defined - should define other chips names here.
-#define BOARD ESP8266_D1_MINI // Board level - define - will only support boards devs are actually using, but intended to support board specific fixes
+// #define BOARD ESP8266_D1_MINI // Board level - define - will only support boards devs are actually using, but intended to support board specific fixes
+#define BOARD ESP32
 
 #define ACTUATOR_LEDBUILTIN_WANT // Control led on board
 //#define ACTUATOR_LEDBUILTIN_DEBUG
@@ -18,7 +19,7 @@
 #define CONTROL_DEMO_MQTT_DEBUG
 
 
-//#define SENSOR_ANALOG_WANT // simple analog read 
+//#define SENSOR_ANALOG_WANT // simple analog read
 #define SENSOR_ANALOG_PIN A0 // Which pin to read - this might be board specific
 #define SENSOR_ANALOG_MS 1000 // How often to read in MS
 #define SENSOR_ANALOG_DEBUG
@@ -38,7 +39,9 @@
 #define SYSTEM_WIFI_WANT
 #define SYSTEM_WIFI_DEBUG
 #define SYSTEM_MQTT_WANT // At this point, commenting this line out is not going to complie - too many dependencies on MQTT
-#define SYSTEM_MQTT_SERVER "public.cloud.shiftr.io" // From the demo - default - can be overridden
+#define SYSTEM_MQTT_SERVER "localhost:8081" // From the demo - default - can be overridden
+#define SYSTEM_MQTT_SSID "public"
+#define SYSTEM_MQTT_PASSWORD "public"
 #define SYSTEM_MQTT_MS 10 //Run client every 10ms
 #define SYSTEM_MQTT_DEBUG
 #define SYSTEM_MQTT_LOOPBACK // If true dispatch the message locally as well.

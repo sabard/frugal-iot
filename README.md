@@ -16,13 +16,27 @@ Tools->Boards Manager->
   - search esp32
   - install esp32 by Espressif Systems (tested version 3.0.4)
 
+  - install arduino-mqtt: https://github.com/256dpi/arduino-mqtt
+  - search lwmqtt
+  - install MQTT by Joel Gaehwiler
+
+  - install ESP-WiFiSettings: https://github.com/Juerd/ESP-WiFiSettings
+  - search WifiSettings
+  - install ESP-WiFiSettings by Jeurd Waalboer,Pwuts
+
 Tools->Board: ESP32 Dev Module or your specific chip
 
 Set JTAG Adapter if using FTDI adapter: (https://www.amazon.com/DSD-TECH-SH-U09C2-Debugging-Programming/dp/B07TXVRQ7V)
 
 ### Code changes
 
-Needed to manually set ACTUATOR_BLINKIN_PIN
+Needed to manually set ACTUATOR_LEDBUILTIN_PIN in actuator_ledbuiltin.cpp
+
+Needed to update html-element-extended to 0.0.11
+
+Note: WifiSettings IP is just your laptop IP, no protocol or port
+
+Note: Make sure to use 460800 baud rate for serial monitoring
 
 ### Installation and testing POC
 

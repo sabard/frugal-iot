@@ -27,9 +27,11 @@
 #else // !LED_BUILTIN
 #ifdef BUILTIN_LED
 #define ACTUATOR_LEDBUILTIN_PIN BUILTIN_LED
+#else
+#define ACTUATOR_LEDBUILTIN_PIN 5
 #endif // BUILTIN_LED
 #endif // LED_BUILTIN
-#endif // ACTUATOR_BLINKIN_PIN
+#endif // ACTUATOR_LEDBUILTIN_PIN
 
 namespace aLedbuiltin {
 
